@@ -99,7 +99,7 @@ public class MarketDataDao {
             CloseableHttpResponse response = client.execute(new HttpGet(uri));
             return response;
         } catch (IOException e) {
-            throw new DataRetrievalFailureException(" date coul not be retrieved");
+            throw new DataRetrievalFailureException(" date could not be retrieved");
         }
     }
 
