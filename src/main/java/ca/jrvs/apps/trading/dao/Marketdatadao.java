@@ -22,14 +22,14 @@ import static ca.jrvs.apps.trading.Util.JasonUtil.toObjectFromJson;
 
 public class Marketdatadao {
 
-    private final String BATCH_BASE_URL;
-    private final String BATCH_TOKEN_URL;
+    private final String BASE_URL;
+    private final String TOKEN_URL;
     HttpClientConnectionManager httpClientconnectionmanager;
 
     public Marketdatadao(HttpClientConnectionManager httpclientconnectionmanager, MarketDataConfig marketdataconfig) {
         this.httpClientconnectionmanager = httpclientconnectionmanager;
-        BATCH_BASE_URL = marketdataconfig.getHost() + "/stock/market/batch?symbols=";
-        BATCH_TOKEN_URL = "&types=quote&token=" + marketdataconfig.getToken();
+        BASE_URL = marketdataconfig.getHost() + "/stock/market/batch?symbols=";
+        TOKEN_URL = "&types=quote&token=" + marketdataconfig.getToken();
 
     }
 
@@ -41,7 +41,9 @@ public class Marketdatadao {
     public CloseableHttpResponse closeableHttpResponse(String uri) {
         CloseableHttpClient client = getHttpClient();
         try {
-            CloseableHttpResponse response = client.execute(new HttpGet(uri));
+
+            HttpGet get = new HttpGet(uri);
+            CloseableHttpResponse response = client.execute(get);
             return response;
         } catch (IOException e) {
             throw new DataRetrievalFailureException(" date coul not be retrieved");
@@ -69,7 +71,7 @@ public class Marketdatadao {
     public List<IexQuote> findIexQuoteByTicker(List<String> tickers) {
         String Tickers = tickers.stream().map(String::valueOf).collect(Collectors.joining(","));
         StringBuilder sburl = new StringBuilder();
-        sburl.append(BATCH_BASE_URL).append(Tickers).append(BATCH_TOKEN_URL);
+        sburl.append(BASE_URL).append(Tickers).append(TOKEN_URL);
 
         //passing URL in and sending http request and getting a response
         String response = ParseResponse(closeableHttpResponse(sburl.toString()));
