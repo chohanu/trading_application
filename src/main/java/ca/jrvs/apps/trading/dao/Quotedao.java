@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import javax.sql.DataSource;
 
 
-public class Quotedao implements CrdRepo<Quote, Integer> {
+public class Quotedao implements CrdRepo<Quote, String> {
 
     private final static String TABLE_NAME = "quote";
     private final static String ID_COLUMN = "ticker";
@@ -22,7 +22,8 @@ public class Quotedao implements CrdRepo<Quote, Integer> {
         this.simpleJdbcInsert = new SimpleJdbcInsert(datasource).withTableName(TABLE_NAME);
     }
 
-    public Quote Save(Quote entity) {
+    @Override
+    public Quote save(Quote entity) {
         SqlParameterSource sqlparametersource = new BeanPropertySqlParameterSource(entity);
         Number numberid = simpleJdbcInsert.executeAndReturnKey(sqlparametersource);
         // entity.setId(numberid.intValue());
@@ -30,14 +31,17 @@ public class Quotedao implements CrdRepo<Quote, Integer> {
 
     }
 
-    public Quote FindbyId(String id) {
+    @Override
+    public Quote findbyId(String id) {
         return null;
     }
 
-    public void DeletebyId(String id) {
+    @Override
+    public void deletebyId(String id) {
 
     }
 
+    @Override
     public boolean existsbyId(String id) {
         return true;
     }

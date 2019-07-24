@@ -28,8 +28,6 @@ public class Quoteservice {
         quote.setId(iexquote.getId());
         quote.setTicker(iexquote.getTicker());
         quote.setLastPrice(iexquote.getLastPrice());
-
-
         return quote;
     }
 

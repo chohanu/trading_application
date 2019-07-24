@@ -21,7 +21,8 @@ public class Traderdao implements CrdRepo<Trader, Integer> {
         this.simplejdbcinsert = new SimpleJdbcInsert(datasource).withTableName(TABLE_NAME);
     }
 
-    public Trader Save(Trader entity) {
+    @Override
+    public Trader save(Trader entity) {
         SqlParameterSource sqlparametersource = new BeanPropertySqlParameterSource(entity);
         Number numberid = simplejdbcinsert.executeAndReturnKey(sqlparametersource);
         // entity.setId(numberid.intValue());
