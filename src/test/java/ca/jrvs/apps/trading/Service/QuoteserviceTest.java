@@ -19,9 +19,6 @@ public class QuoteserviceTest {
         iextest.setSymbol("bb");
         iextest.setLatestPrice(45.0);
 
-
-
-
         Quote actualquote = new Quote();
         actualquote.setBidSize((long) 10.0);
         actualquote.setBidPrice(20.0);
