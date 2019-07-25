@@ -1,67 +1,66 @@
 package ca.jrvs.apps.trading.model.domain;
 
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "askPrice",
-        "askSize",
+        "ticker",
+        "lastPrice",
         "bidPrice",
         "bidSize",
-        "id",
-        "lastPrice",
-        "ticker"
+        "askPrice",
+        "askSize",
+        "id"
 })
-public class Quote {
+public class Quote implements Entity<String> {
 
-    @JsonProperty("askPrice")
-    private Long askPrice;
-    @JsonProperty("askSize")
-    private Long askSize;
-    @JsonProperty("bidPrice")
-    private Long bidPrice;
-    @JsonProperty("bidSize")
-    private Long bidSize;
-    @JsonProperty("id")
-    private String id;
-    @JsonProperty("lastPrice")
-    private Long lastPrice;
     @JsonProperty("ticker")
     private String ticker;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
+    @JsonProperty("lastPrice")
+    private Double lastPrice; //= Double.valueOf(0);
+    @JsonProperty("bidPrice")
+    private Double bidPrice;//= Double.valueOf(0);
+    @JsonProperty("bidSize")
+    private Long bidSize;//= Long.valueOf(0);
     @JsonProperty("askPrice")
-    public Long getAskPrice() {
-        return askPrice;
-    }
-
-    @JsonProperty("askPrice")
-    public void setAskPrice(Long askPrice) {
-        this.askPrice = askPrice;
-    }
-
+    private Double askPrice;// = Double.valueOf(0);
     @JsonProperty("askSize")
-    public Long getAskSize() {
-        return askSize;
+    private Long askSize;//= Long.valueOf(0);
+    @JsonProperty("id")
+    private String id;
+
+    @JsonProperty("ticker")
+    public String getTicker() {
+        return ticker;
     }
 
-    @JsonProperty("askSize")
-    public void setAskSize(Long askSize) {
-        this.askSize = askSize;
+    @JsonProperty("ticker")
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
+    }
+
+    @JsonProperty("lastPrice")
+    public Double getLastPrice() {
+        return lastPrice;
+    }
+
+    @JsonProperty("lastPrice")
+    public void setLastPrice(Double lastPrice) {
+        this.lastPrice = lastPrice;
     }
 
     @JsonProperty("bidPrice")
-    public Long getBidPrice() {
+    public Double getBidPrice() {
         return bidPrice;
     }
 
     @JsonProperty("bidPrice")
-    public void setBidPrice(Long bidPrice) {
+    public void setBidPrice(Double bidPrice) {
         this.bidPrice = bidPrice;
     }
 
@@ -75,6 +74,26 @@ public class Quote {
         this.bidSize = bidSize;
     }
 
+    @JsonProperty("askPrice")
+    public Double getAskPrice() {
+        return askPrice;
+    }
+
+    @JsonProperty("askPrice")
+    public void setAskPrice(Double askPrice) {
+        this.askPrice = askPrice;
+    }
+
+    @JsonProperty("askSize")
+    public Long getAskSize() {
+        return askSize;
+    }
+
+    @JsonProperty("askSize")
+    public void setAskSize(Long askSize) {
+        this.askSize = askSize;
+    }
+
     @JsonProperty("id")
     public String getId() {
         return id;
@@ -85,28 +104,36 @@ public class Quote {
         this.id = id;
     }
 
-    @JsonProperty("lastPrice")
-    public Long getLastPrice() {
-        return lastPrice;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Quote)) return false;
+        Quote quote = (Quote) o;
+        return Objects.equals(getTicker(), quote.getTicker()) &&
+                Objects.equals(getLastPrice(), quote.getLastPrice()) &&
+                Objects.equals(getBidPrice(), quote.getBidPrice()) &&
+                Objects.equals(getBidSize(), quote.getBidSize()) &&
+                Objects.equals(getAskPrice(), quote.getAskPrice()) &&
+                Objects.equals(getAskSize(), quote.getAskSize()) &&
+                Objects.equals(getId(), quote.getId());
     }
 
-    @JsonProperty("lastPrice")
-    public void setLastPrice(Long lastPrice) {
-        this.lastPrice = lastPrice;
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTicker(), getLastPrice(), getBidPrice(), getBidSize(), getAskPrice(), getAskSize(), getId());
     }
 
-    @JsonProperty("ticker")
-    public String getTicker() {
-        return ticker;
+    @Override
+    public String toString() {
+        return "Quote{" +
+                "ticker='" + ticker + '\'' +
+                ", lastPrice=" + lastPrice +
+                ", bidPrice=" + bidPrice +
+                ", bidSize=" + bidSize +
+                ", askPrice=" + askPrice +
+                ", askSize=" + askSize +
+                ", id='" + id + '\'' +
+                '}';
     }
-
-    @JsonProperty("ticker")
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
+}
 

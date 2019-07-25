@@ -4,27 +4,36 @@ import ca.jrvs.apps.trading.model.domain.IexQuote;
 import ca.jrvs.apps.trading.model.domain.Quote;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class QuoteserviceTest {
 
     @Test
     public void buildquotefromiexquotetest() {
 
         IexQuote iextest = new IexQuote();
-        // iextest.setIexAskPrice();
+        iextest.setIexAskPrice(40.0);
+        iextest.setIexAskSize((long) 45.0);
+        iextest.setIexBidPrice(20.0);
+        iextest.setIexBidSize((long) 10.0);
+        iextest.setSymbol("bb");
+        iextest.setLatestPrice(45.0);
+
+
 
 
         Quote actualquote = new Quote();
-        actualquote.setBidSize((long) 10);
-        actualquote.setBidPrice((long) 20);
-        actualquote.setAskPrice((long) 40);
+        actualquote.setBidSize((long) 10.0);
+        actualquote.setBidPrice(20.0);
+        actualquote.setAskPrice(40.0);
         actualquote.setAskSize((long) 45);
         actualquote.setId("yo");
         actualquote.setTicker("bb");
-        actualquote.setLastPrice((long) 45);
+        actualquote.setLastPrice(45.0);
 
 
-        // Quote expectedquote = Quoteservice.buildQuotefromIexquote(iexquote);
-        // assertEquals(actualquote,expectedquote);
+        Quote expectedquote = Quoteservice.buildQuotefromIexquote(iextest);
+        assertEquals(actualquote, expectedquote);
 
 
     }
