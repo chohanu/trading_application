@@ -9,5 +9,5 @@ public class ResourceNotFoundException extends RuntimeException {
         super(e.getMessage());
     }
 
-    
+
 }
