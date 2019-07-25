@@ -68,5 +68,7 @@ public class Quotecontroller {
 
     }
 
+    //getbatchquote
+
 
 } // end of class
