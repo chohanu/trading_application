@@ -9,7 +9,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
+import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,16 +22,18 @@ import java.util.stream.Collectors;
 
 import static ca.jrvs.apps.trading.Util.JasonUtil.toObjectFromJson;
 
+@Repository
 public class Marketdatadao {
 
-    private final String BASE_URL;
-    private final String TOKEN_URL;
+    private final String firsthalf_url;
+    private final String secondhalf_url;
     HttpClientConnectionManager httpClientconnectionmanager;
 
+    @Autowired
     public Marketdatadao(HttpClientConnectionManager httpclientconnectionmanager, MarketDataConfig marketdataconfig) {
         this.httpClientconnectionmanager = httpclientconnectionmanager;
-        BASE_URL = marketdataconfig.getHost() + "/stock/market/batch?symbols=";
-        TOKEN_URL = "&types=quote&token=" + marketdataconfig.getToken();
+        firsthalf_url = marketdataconfig.getHost() + "/stable/stock/market/batch?symbols=";
+        secondhalf_url = "&types=quote&token=" + marketdataconfig.getToken();
 
     }
 
@@ -39,11 +43,15 @@ public class Marketdatadao {
     }
 
     public CloseableHttpResponse closeableHttpResponse(String uri) {
+        System.out.println(uri);
         CloseableHttpClient client = getHttpClient();
+        System.out.println("2");
         try {
 
             HttpGet get = new HttpGet(uri);
+            System.out.println("3");
             CloseableHttpResponse response = client.execute(get);
+            System.out.println("4");
             return response;
         } catch (IOException e) {
             throw new DataRetrievalFailureException(" date coul not be retrieved");
@@ -52,10 +60,12 @@ public class Marketdatadao {
 
     public String ParseResponse(CloseableHttpResponse response) {
         int status = response.getStatusLine().getStatusCode();
+        System.out.println("kuttay chal ja" + status);
         switch (status) {
             case 200:
                 try {
-                    EntityUtils.toString(response.getEntity());
+                    //System.out.println(EntityUtils.toString(response.getEntity()));
+                    return EntityUtils.toString(response.getEntity());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -71,7 +81,7 @@ public class Marketdatadao {
     public List<IexQuote> findIexQuoteByTicker(List<String> tickers) {
         String Tickers = tickers.stream().map(String::valueOf).collect(Collectors.joining(","));
         StringBuilder sburl = new StringBuilder();
-        sburl.append(BASE_URL).append(Tickers).append(TOKEN_URL);
+        sburl.append(firsthalf_url).append(Tickers).append(secondhalf_url);
 
         //passing URL in and sending http request and getting a response
         String response = ParseResponse(closeableHttpResponse(sburl.toString()));

@@ -1,25 +1,25 @@
 package ca.jrvs.apps.trading.Service;
 
-import ca.jrvs.apps.trading.dao.Marketdatadao;
 import ca.jrvs.apps.trading.dao.Quotedao;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
 import ca.jrvs.apps.trading.model.domain.Quote;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-
+@Service
 public class Quoteservice {
 
 
     private Quotedao quotedao;
-    private Marketdatadao marketdatadao;
 
-    public Quoteservice(Quotedao quotedao, Marketdatadao marketdatadao) {
+    //private Marketdatadao marketdatadao;
+    @Autowired
+    public Quoteservice(Quotedao quotedao) {
         this.quotedao = quotedao;
-        this.marketdatadao = marketdatadao;
+        //this.marketdatadao = marketdatadao;
     }
 
-    public static Quote buildQuotefromIexquote(IexQuote iexquote) {
+    public Quote buildQuotefromIexquote(IexQuote iexquote) {
 
         Quote quote = new Quote();
         quote.setAskPrice(iexquote.getIexAskPrice());
@@ -32,7 +32,7 @@ public class Quoteservice {
         return quote;
     }
 
-    public void initQuote(List<String> tickers) {
+ /*   public void initQuote(List<String> tickers) {
         for (String ticker : tickers) {
             IexQuote iexquote = marketdatadao.findIexQuoteByTicker(ticker);
             Quote quote = buildQuotefromIexquote(iexquote);
@@ -41,10 +41,21 @@ public class Quoteservice {
 
     }
 
+
+
+
+
     public void initQuote(String ticker) {
         initQuote(Collections.singletonList(ticker));
 
     }
+
+  */
+
+    public void initQuote(Quote quote) {
+        quotedao.save(quote);
+    }
+
 
 
     public void updateMarketData() {

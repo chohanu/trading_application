@@ -1,14 +1,16 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Quote;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 
-
+@Repository
 public class Quotedao implements CrdRepo<Quote, String> {
 
     private final static String TABLE_NAME = "quote";
@@ -17,15 +19,17 @@ public class Quotedao implements CrdRepo<Quote, String> {
     private JdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleJdbcInsert;
 
+    @Autowired
     public Quotedao(DataSource datasource) {
         this.jdbcTemplate = new JdbcTemplate(datasource);
         this.simpleJdbcInsert = new SimpleJdbcInsert(datasource).withTableName(TABLE_NAME);
     }
 
+
     @Override
     public Quote save(Quote entity) {
         SqlParameterSource sqlparametersource = new BeanPropertySqlParameterSource(entity);
-        Number numberid = simpleJdbcInsert.executeAndReturnKey(sqlparametersource);
+        simpleJdbcInsert.execute(sqlparametersource);
         // entity.setId(numberid.intValue());
         return entity;
 

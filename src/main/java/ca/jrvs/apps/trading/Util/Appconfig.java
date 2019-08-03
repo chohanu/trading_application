@@ -22,30 +22,22 @@ public class Appconfig {
     }
 
     @Bean
-    public HttpClientConnectionManager httpClientConnectionManager() {
+    public HttpClientConnectionManager ConnectionManager() {
         PoolingHttpClientConnectionManager httpconnectionmanager = new PoolingHttpClientConnectionManager();
         httpconnectionmanager.setMaxTotal(50);
-        httpconnectionmanager.setDefaultMaxPerRoute(20);
+        httpconnectionmanager.setDefaultMaxPerRoute(50);
         return httpconnectionmanager;
 
     }
 
+
     @Bean
-    public DataSource datasource() {
-        // String jdbcurl;
-        // String user;
-        //String password;
+    public DataSource dataSource() {
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/jrvstrading");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("password");
 
-        // jdbcurl = System.getenv();
-        // user = System.getenv();
-        // password = System.getenv();
-
-        BasicDataSource basicdatasource = new BasicDataSource();
-        basicdatasource.setDriverClassName("org.postgresql.Driver");
-        basicdatasource.setUrl(" ");
-        basicdatasource.setUsername("user");
-        basicdatasource.setPassword("password");
-        return basicdatasource;
-
+        return dataSource;
     }
 }

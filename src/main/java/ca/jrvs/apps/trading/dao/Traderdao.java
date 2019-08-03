@@ -1,5 +1,5 @@
 package ca.jrvs.apps.trading.dao;
-
+/*
 import ca.jrvs.apps.trading.model.domain.Trader;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -32,3 +32,6 @@ public class Traderdao implements CrdRepo<Trader, Integer> {
 
 
 } // end of class
+
+
+ */

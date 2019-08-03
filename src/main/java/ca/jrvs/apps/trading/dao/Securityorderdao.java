@@ -1,5 +1,5 @@
 package ca.jrvs.apps.trading.dao;
-
+/*
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -29,3 +29,6 @@ public class Securityorderdao implements CrdRepo<SecurityOrder, Integer> {
         return entity;
     }
 }
+
+
+ */

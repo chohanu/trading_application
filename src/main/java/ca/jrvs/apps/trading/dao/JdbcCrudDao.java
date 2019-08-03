@@ -1,5 +1,6 @@
 package ca.jrvs.apps.trading.dao;
 
+/*
 import ca.jrvs.apps.trading.model.domain.Entity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -63,3 +64,6 @@ public abstract class JdbcCrudDao<E extends Entity, ID> implements CrdRepo<E, ID
 
 
 }
+
+
+ */
