@@ -1,7 +1,11 @@
 package ca.jrvs.apps.trading.dao;
 
-/*
+
 import ca.jrvs.apps.trading.model.domain.Entity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -10,60 +14,87 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 public abstract class JdbcCrudDao<E extends Entity, ID> implements CrdRepo<E, ID> {
 
 
-    abstract public JdbcTemplate getjdbctemplate();
+    private static final Logger logger = LoggerFactory.getLogger(JdbcCrudDao.class);
 
-    abstract public SimpleJdbcInsert getsimplejdbcinsert();
+    abstract public JdbcTemplate getJdbcTemplate();
 
-    abstract public String gettablename();
+    abstract public SimpleJdbcInsert getSimpleJdbcInsert();
 
-    abstract public String getIdname();
+    abstract public String getTableName();
 
-    abstract public Class getEntityclass();
+    abstract public String getIdName();
+
+    abstract Class getEntityClass();
 
 
     @Override
     public E save(E entity) {
         SqlParameterSource parametersource = new BeanPropertySqlParameterSource(entity);
-        Number newId = getsimplejdbcinsert().executeAndReturnKey(parametersource);
+        Number newId = getSimpleJdbcInsert().executeAndReturnKey(parametersource);
         entity.setId(newId.intValue());
         return entity;
     }
 
     @Override
-    public boolean existsbyId(ID id) {
-        return existsbyId(getIdname(), id);
+    public boolean existsById(ID id) {
+        return existsById(getIdName(), id);
     }
 
     @Override
-    public E findbyId(ID id) {
-        return findbyId(getIdname(), id, false, getEntityclass());
+    public E findById(ID id) {
+        return findById(getIdName(), id, false, getEntityClass());
     }
+
 
     @Override
-    public void deletebyId(ID id) {
-        return deletebyId(getIdname(), id);
+    public void deleteById(ID id) {
+        deleteById(getIdName(), id);
     }
 
 
-    public E findbyIdforupdate(ID id) {
-        return findbyIdforupdate(getIdname(), id, true, getEntityclass());
-    }
+    @SuppressWarnings("unchecked")
+    public E findById(String idName, ID id, boolean forupdate, Class clazz) {
+        E entityobject = null;
+        String selectSql = "SELECT * FROM " + getTableName() + " WHERE " + idName + " =?";
 
-
-    public E findbyId(String idName, ID id, boolean forupdate, Class clazz) {
-        E t = null;
-        String selectsql = "SELEC * FROM " + gettablename() + "WHERE" + idName + "=?";
         if (forupdate) {
-            selectsql += " for update";
+            selectSql += " for update";
         }
+        logger.info(selectSql);
 
-        //logger.info.(selectsql);
-
-
+        try {
+            entityobject = (E) getJdbcTemplate().queryForObject(selectSql, BeanPropertyRowMapper.newInstance(clazz), id);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("Can't find quote id:" + id, e);
+        }
+        if (entityobject == null) {
+            throw new ResourceNotFoundException("Er:Resource not found");
+        }
+        return entityobject;
     }
 
 
+    public boolean existsById(String idName, ID id) {
+        if (id == null) {
+            throw new IllegalArgumentException("ID can't be null");
+        }
+        String selectSql = "SELECT count(*) FROM " + getTableName() + " WHERE " + idName + " =?";
+        logger.info(selectSql);
+        Integer count = getJdbcTemplate().queryForObject(selectSql, Integer.class, id);
+        return count != 0;
+    }
+
+    public void deleteById(String idName, ID id) {
+        if (id == null) {
+            throw new IllegalArgumentException("ID can't be null");
+        }
+        String deleteSql = "DELETE FROM " + getTableName() + " WHERE " + idName + " =?";
+        logger.info(deleteSql);
+        getJdbcTemplate().update(deleteSql, id);
+    }
 }
 
 
- */
+
+
+

@@ -1,34 +1,43 @@
 package ca.jrvs.apps.trading.dao;
-/*
+
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
-import javax.sql.DataSource;
+public class Securityorderdao extends JdbcCrudDao<SecurityOrder, Integer> {
+    private final static String TABLE_NAME = "security_order";
+    private final static String ID_NAME = "id";
+    private JdbcTemplate jdbcTemplate;
+    private SimpleJdbcInsert simpleJdbcInsert;
 
-public class Securityorderdao implements CrdRepo<SecurityOrder, Integer> {
+    public Securityorderdao(JdbcTemplate jdbcTemplate, SimpleJdbcInsert simpleJdbcInsert) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.simpleJdbcInsert = simpleJdbcInsert;
+    }
 
-    private final String TABLE_NAME = "securityorderdao";
-    private final String ID_COLUMN;
+    @Override
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
 
-    private JdbcTemplate jdbctemplate;
-    private SimpleJdbcInsert simplejdbcinsert;
+    @Override
+    public SimpleJdbcInsert getSimpleJdbcInsert() {
+        return simpleJdbcInsert;
+    }
 
-    public Securityorderdao(DataSource datasource) {
-        this.jdbctemplate = new JdbcTemplate(datasource);
-        this.simplejdbcinsert = new SimpleJdbcInsert(datasource).withTableName("securityorderdao");
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
     }
 
 
-    public SecurityOrder Save(SecurityOrder entity) {
-        SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(entity);
-        Number numberid = simplejdbcinsert.executeAndReturnKey(sqlParameterSource);
-        entity.setId(numberid.intValue());
-        return entity;
+    @Override
+    public String getIdName() {
+        return ID_NAME;
+    }
+
+    @Override
+    public Class getEntityClass() {
+        return SecurityOrder.class;
     }
 }
-
-
- */

@@ -1,38 +1,63 @@
 package ca.jrvs.apps.trading.dao;
 
-/*
+
 import ca.jrvs.apps.trading.model.domain.Account;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
 
-public class Accountdao implements CrdRepo<Account, Integer> {
 
-    private final String TABLE_NAME = "accountdao";
-    private final String ID_COLUMN;
-
+public class Accountdao extends JdbcCrudDao<Account, Integer> {
+    private final static String TABLE_NAME = "account";
+    private final static String ID_NAME = "id";
     private JdbcTemplate jdbctemplate;
     private SimpleJdbcInsert simplejdbcinsert;
 
     public Accountdao(DataSource datasource) {
         this.jdbctemplate = new JdbcTemplate(datasource);
-        this.simplejdbcinsert = new SimpleJdbcInsert(datasource).withTableName("accountdao");
+        this.simplejdbcinsert = new SimpleJdbcInsert(datasource).withTableName(TABLE_NAME).usingGeneratedKeyColumns(ID_NAME);
     }
 
-    public Account Save(Account entity) {
-        SqlParameterSource sqlparametersource = new BeanPropertySqlParameterSource(entity);
-        Number numberid = simplejdbcinsert.executeAndReturnKey(sqlparametersource);
-        entity.setId(numberid.intValue());
-        return entity;
+    public Account findByTraderId(int traderid) {
+        return super.findById("trader_id", traderid, false, Account.class);
+
     }
 
+
+    public Account findByAccountId(int accountid) {
+        return super.findById(ID_NAME, accountid, true, Account.class);
+    }
+
+
+    @Override
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbctemplate;
+    }
+
+    @Override
+    public SimpleJdbcInsert getSimpleJdbcInsert() {
+        return simplejdbcinsert;
+    }
+
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+
+
+    @Override
+    public String getIdName() {
+        return ID_NAME;
+    }
+
+    @Override
+    public Class getEntityClass() {
+        return Account.class;
+    }
 
 
 
 } // end of class
 
 
- */

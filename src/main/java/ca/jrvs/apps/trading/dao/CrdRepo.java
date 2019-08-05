@@ -2,11 +2,11 @@ package ca.jrvs.apps.trading.dao;
 
 public interface CrdRepo<T, ID> {
 
-    T findbyId(ID id);
+    T findById(ID id);
 
-    void deletebyId(ID id);
+    void deleteById(ID id);
 
     T save(T entity);
 
-    boolean existsbyId(ID id);
+    boolean existsById(ID id);
 }

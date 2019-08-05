@@ -64,7 +64,7 @@ public class QuoteserviceTest {
         testQuote.setBidSize((long) 166.0);
         testQuote.setAskSize((long) 122.0);
         testQuote.setAskPrice(19.00);
-        // quoteService.initQuote(testQuote);
+        quoteService.initQuote(testQuote);
     }
 
     @Test

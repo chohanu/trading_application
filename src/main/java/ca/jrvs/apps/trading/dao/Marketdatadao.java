@@ -60,7 +60,7 @@ public class Marketdatadao {
 
     public String ParseResponse(CloseableHttpResponse response) {
         int status = response.getStatusLine().getStatusCode();
-        System.out.println("kuttay chal ja" + status);
+        System.out.println(status);
         switch (status) {
             case 200:
                 try {

@@ -1,14 +1,12 @@
 package ca.jrvs.apps.trading.dao;
-/*
+
 import ca.jrvs.apps.trading.model.domain.Trader;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
 
-public class Traderdao implements CrdRepo<Trader, Integer> {
+public class Traderdao extends JdbcCrudDao<Trader, Integer> {
 
 
     private final String TABLE_NAME = "trader";
@@ -22,16 +20,32 @@ public class Traderdao implements CrdRepo<Trader, Integer> {
     }
 
     @Override
-    public Trader save(Trader entity) {
-        SqlParameterSource sqlparametersource = new BeanPropertySqlParameterSource(entity);
-        Number numberid = simplejdbcinsert.executeAndReturnKey(sqlparametersource);
-        // entity.setId(numberid.intValue());
-        return entity;
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbctemplate;
+    }
 
+    @Override
+    public SimpleJdbcInsert getSimpleJdbcInsert() {
+        return simplejdbcinsert;
+    }
+
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+
+
+    @Override
+    public String getIdName() {
+        return ID_COLUMN;
+    }
+
+    @Override
+    public Class getEntityClass() {
+        return Traderdao.class;
     }
 
 
 } // end of class
 
 
- */

@@ -3,19 +3,16 @@ package ca.jrvs.apps.trading.dao;
 import ca.jrvs.apps.trading.model.domain.Quote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 
 @Repository
-public class Quotedao implements CrdRepo<Quote, String> {
+public class Quotedao extends JdbcCrudDao<Quote, Integer> {
 
     private final static String TABLE_NAME = "quote";
     private final static String ID_COLUMN = "ticker";
-
     private JdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleJdbcInsert;
 
@@ -25,28 +22,31 @@ public class Quotedao implements CrdRepo<Quote, String> {
         this.simpleJdbcInsert = new SimpleJdbcInsert(datasource).withTableName(TABLE_NAME);
     }
 
-
     @Override
-    public Quote save(Quote entity) {
-        SqlParameterSource sqlparametersource = new BeanPropertySqlParameterSource(entity);
-        simpleJdbcInsert.execute(sqlparametersource);
-        // entity.setId(numberid.intValue());
-        return entity;
-
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
     }
 
     @Override
-    public Quote findbyId(String id) {
-        return null;
+    public SimpleJdbcInsert getSimpleJdbcInsert() {
+        return simpleJdbcInsert;
     }
 
     @Override
-    public void deletebyId(String id) {
-
+    public Class getEntityClass() {
+        return Quote.class;
     }
 
     @Override
-    public boolean existsbyId(String id) {
-        return true;
+    public String getTableName() {
+        return TABLE_NAME;
     }
+
+
+    @Override
+    public String getIdName() {
+        return ID_COLUMN;
+    }
+
+
 } // end of class
