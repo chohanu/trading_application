@@ -1,14 +1,14 @@
 package ca.jrvs.apps.trading.controller;
 
-/*
+
 import ca.jrvs.apps.trading.Service.Quoteservice;
 import ca.jrvs.apps.trading.dao.Marketdatadao;
 import ca.jrvs.apps.trading.dao.Quotedao;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
 import ca.jrvs.apps.trading.model.domain.Quote;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,11 +36,12 @@ public class Quotecontroller {
             e.printStackTrace();
         }
 
+        return null;  // delete this later
 
     }
 
     @RequestMapping(path = "/iex/ticker/{ticker}")
-    // @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public IexQuote iexquote(String ticker) {
         IexQuote quote = new IexQuote();
@@ -56,23 +57,39 @@ public class Quotecontroller {
         return quote;
     }
 
-
-    @RequestMapping(path = "/tickerId/{tickerId}")
-    //@ResponseStatus(HttpStatus)
-    @ResponseBody
-    public void addtickertoquotetable(String ticker) {
+    @PostMapping(path = "/tickerId/{tickerId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createQuote(@PathVariable String tickerId) {
         try {
-            quoteservice.initQuote(ticker);
+            // quoteservice.initQuote(tickerId);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
     }
 
-    //getbatchquote
+
+    @PutMapping(path = "/iexMarketData")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateMarketData() {
+        try {
+            quoteservice.updateMarketData();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PutMapping(path = "/")
+    @ResponseStatus(HttpStatus.OK)
+    public void putQuote(@RequestBody Quote quote) {
+        try {
+            // quotedao.update(Collections.singletonList(quote));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
 } // end of class
 
 
- */
