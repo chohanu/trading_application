@@ -24,6 +24,19 @@ public class Accountdao extends JdbcCrudDao<Account, Integer> {
 
     }
 
+    public void updateAmountusingId(Integer Id, Double fund) {
+        String SQL = "UPDATE " + TABLE_NAME + " SET amount = ? WHERE " + ID_NAME + " = ?";
+        logger.debug(SQL + ", " + fund + ", " + Id);
+        jdbctemplate.update(SQL, fund, Id);
+
+
+    }
+
+    @Override
+    public Class getIdClass() {
+        return Integer.class;
+    }
+
 
     public Account findByAccountId(int accountid) {
         return super.findById(ID_NAME, accountid, true, Account.class);
