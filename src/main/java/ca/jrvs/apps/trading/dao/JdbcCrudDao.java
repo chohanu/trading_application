@@ -11,10 +11,12 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
+import java.util.List;
+
 public abstract class JdbcCrudDao<E extends Entity, ID> implements CrdRepo<E, ID> {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(JdbcCrudDao.class);
+    public static final Logger logger = LoggerFactory.getLogger(JdbcCrudDao.class);
 
     abstract public JdbcTemplate getJdbcTemplate();
 
@@ -24,7 +26,10 @@ public abstract class JdbcCrudDao<E extends Entity, ID> implements CrdRepo<E, ID
 
     abstract public String getIdName();
 
-    abstract Class getEntityClass();
+    abstract public Class getEntityClass();
+
+    abstract public Class getIdClass();
+
 
 
     @Override
@@ -92,6 +97,15 @@ public abstract class JdbcCrudDao<E extends Entity, ID> implements CrdRepo<E, ID
         logger.info(deleteSql);
         getJdbcTemplate().update(deleteSql, id);
     }
+
+    // fetches all of the IDs/tickers from the ID column
+    public List<ID> returnalltickers() {
+        List<ID> returnTickers = getJdbcTemplate().queryForList("select " + getIdName() + " from " + getTableName(), getIdClass());
+        return returnTickers;
+    }
+
+
+
 }
 
 
