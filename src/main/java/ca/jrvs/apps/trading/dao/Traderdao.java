@@ -34,6 +34,10 @@ public class Traderdao extends JdbcCrudDao<Trader, Integer> {
         return TABLE_NAME;
     }
 
+    @Override
+    public Class getIdClass() {
+        return Integer.class;
+    }
 
     @Override
     public String getIdName() {

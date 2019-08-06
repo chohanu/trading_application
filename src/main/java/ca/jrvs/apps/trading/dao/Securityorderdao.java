@@ -15,6 +15,13 @@ public class Securityorderdao extends JdbcCrudDao<SecurityOrder, Integer> {
         this.simpleJdbcInsert = simpleJdbcInsert;
     }
 
+    public void DeletebyaccID(Integer accountid) {
+        if (accountid == null)
+            throw new IllegalArgumentException(" accountid is null");
+        super.deleteById("account_id", accountid);
+
+    }
+
     @Override
     public JdbcTemplate getJdbcTemplate() {
         return jdbcTemplate;
@@ -30,6 +37,10 @@ public class Securityorderdao extends JdbcCrudDao<SecurityOrder, Integer> {
         return TABLE_NAME;
     }
 
+    @Override
+    public Class getIdClass() {
+        return Integer.class;
+    }
 
     @Override
     public String getIdName() {
@@ -40,4 +51,6 @@ public class Securityorderdao extends JdbcCrudDao<SecurityOrder, Integer> {
     public Class getEntityClass() {
         return SecurityOrder.class;
     }
+
+
 }
