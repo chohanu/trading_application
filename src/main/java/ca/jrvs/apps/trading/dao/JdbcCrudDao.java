@@ -104,7 +104,12 @@ public abstract class JdbcCrudDao<E extends Entity, ID> implements CrdRepo<E, ID
         return returnTickers;
     }
 
-
+    public List<E> findAll() {
+        String sql = "select * from " + getTableName();
+        logger.debug(sql);
+        List<E> list = getJdbcTemplate().query(sql, BeanPropertyRowMapper.newInstance(getEntityClass()));
+        return list;
+    }
 
 }
 

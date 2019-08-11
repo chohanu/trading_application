@@ -28,17 +28,18 @@ public class Quotecontroller {
 
 
     @RequestMapping(path = "/dailyList")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
     public List<Quote> Dailylist() {
 
         try {
-            // return quotedao.findAll();
+            return quotedao.findAll();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
-        return null;  // delete this later
-
     }
+
+
 
     @RequestMapping(path = "/iex/ticker/{ticker}")
     @ResponseStatus(HttpStatus.OK)
@@ -61,7 +62,7 @@ public class Quotecontroller {
     @ResponseStatus(HttpStatus.CREATED)
     public void createQuote(@PathVariable String tickerId) {
         try {
-            // quoteservice.initQuote(tickerId);
+            quoteservice.initQuote(tickerId);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -82,7 +83,7 @@ public class Quotecontroller {
     @ResponseStatus(HttpStatus.OK)
     public void putQuote(@RequestBody Quote quote) {
         try {
-            // quotedao.update(Collections.singletonList(quote));
+            quotedao.updateQuote(quote);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

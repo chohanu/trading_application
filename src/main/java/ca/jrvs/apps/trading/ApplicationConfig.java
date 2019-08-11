@@ -1,5 +1,5 @@
-package ca.jrvs.apps.trading.Util;
 
+package ca.jrvs.apps.trading;
 
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-public class Appconfig {
+public class ApplicationConfig {
 
     @Bean
     public MarketDataConfig MarketDataConfig() {

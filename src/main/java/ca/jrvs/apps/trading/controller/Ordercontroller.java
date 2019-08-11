@@ -30,8 +30,7 @@ public class Ordercontroller {
 
     public SecurityOrder MarketOrder(Marketorderdto marketorderdto) {
         try {
-            // return orderservice.executeMarketOrder(marketorderdto);
-            return null;
+            return orderservice.executeMarketOrder(marketorderdto);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

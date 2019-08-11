@@ -9,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,7 +44,6 @@ public class QuoteserviceTest {
 
         Quote expectedQuote = quoteService.buildQuotefromIexquote(iexQuote);
         assertEquals(testQuote, expectedQuote);
-        /*
         assertEquals(testQuote.getAskPrice(), expectedQuote.getAskPrice());
         assertEquals(testQuote.getAskSize(), expectedQuote.getAskSize());
         assertEquals(testQuote.getId(), expectedQuote.getId());
@@ -50,8 +51,6 @@ public class QuoteserviceTest {
         assertEquals(testQuote.getBidPrice(), expectedQuote.getBidPrice());
         assertEquals(testQuote.getBidSize(), expectedQuote.getBidSize());
 
-
-         */
     }
 
     @Test
@@ -64,12 +63,7 @@ public class QuoteserviceTest {
         testQuote.setBidSize((long) 166.0);
         testQuote.setAskSize((long) 122.0);
         testQuote.setAskPrice(19.00);
-        quoteService.initQuote(testQuote);
-    }
-
-    @Test
-    public void marketDataUpdate() {
-        // quoteService.updateMarketData();
+        quoteService.initQuote(Arrays.asList(testQuote.toString()));
     }
 
 }

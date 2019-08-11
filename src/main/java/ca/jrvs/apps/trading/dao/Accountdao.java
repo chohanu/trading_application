@@ -4,10 +4,11 @@ package ca.jrvs.apps.trading.dao;
 import ca.jrvs.apps.trading.model.domain.Account;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 
-
+@Repository
 public class Accountdao extends JdbcCrudDao<Account, Integer> {
     private final static String TABLE_NAME = "account";
     private final static String ID_NAME = "id";
@@ -24,7 +25,7 @@ public class Accountdao extends JdbcCrudDao<Account, Integer> {
 
     }
 
-    public void updateAmountusingId(Integer Id, Double fund) {
+    public void updateAmountusingId(Double fund, Integer Id) {
         String SQL = "UPDATE " + TABLE_NAME + " SET amount = ? WHERE " + ID_NAME + " = ?";
         logger.debug(SQL + ", " + fund + ", " + Id);
         jdbctemplate.update(SQL, fund, Id);

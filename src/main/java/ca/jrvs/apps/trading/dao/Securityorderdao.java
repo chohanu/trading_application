@@ -3,7 +3,9 @@ package ca.jrvs.apps.trading.dao;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class Securityorderdao extends JdbcCrudDao<SecurityOrder, Integer> {
     private final static String TABLE_NAME = "security_order";
     private final static String ID_NAME = "id";

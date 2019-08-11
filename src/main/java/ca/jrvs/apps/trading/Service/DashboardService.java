@@ -7,15 +7,21 @@ import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import ca.jrvs.apps.trading.model.view.PortFolioView;
 import ca.jrvs.apps.trading.model.view.TraderAccountView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Service
+@Transactional
 public class DashboardService {
     private Traderdao traderdao;
     private Quotedao quotedao;
     private PositionDao positiondao;
     private Accountdao accountdao;
 
+    @Autowired
     public DashboardService(Traderdao traderdao, Quotedao quotedao, PositionDao positiondao, Accountdao accountdao) {
         this.traderdao = traderdao;
         this.quotedao = quotedao;

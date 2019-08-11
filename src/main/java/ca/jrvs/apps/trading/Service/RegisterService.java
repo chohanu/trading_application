@@ -59,13 +59,6 @@ public class RegisterService {
 
     }
 
-    /**
-     * A trader can be deleted iff no open position and no cash balance.
-     * - validate traderID
-     * - get trader account by traderId and check account balance
-     * - get positions by accountId and check positions
-     * - delete all securityOrders, account, trader (in this order)
-     */
 
     public void deleteTraderById(Integer traderId) {
         if (traderId == null) {
