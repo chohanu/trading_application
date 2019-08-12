@@ -31,10 +31,21 @@ bash start_up.sh PSQL_HOST PSQL_USER PSQL_PASSWORD</p>
 <li>
 <p>Use the API through Swagger UI<br>
 <a href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a></p>
+  <img src="/assets/Twitter.PNG">
+  
+  
+  
+  
+  
 </li>
 <li>
 <p>We can also use the API though POSTMAN by executing the http  request and importing the API specification.<br>
 <a href="http://localhost:8080/v2/api-docs">http://localhost:8080/v2/api-docs</a></p>
+  <img src="/assets/Twitter.PNG">
+  
+  
+  
+  
 </li>
 </ul>
 <h2 id="rest-api-usage">Rest API Usage</h2>
@@ -80,8 +91,15 @@ database.</p>
 <ul>
 <li><code>GET '/health'</code> Checks if SpringBoot app is running.</li>
 </ul>
+
+
+
 <h2 id="architecture">Architecture</h2>
 <img src="/assets/Twitter.PNG">
+
+
+
+
 <p><strong>Controller</strong></p>
 <p>This layer interacts with the user with the help of Swagger UI. It gets input from the user and then calls the corresponding service method</p>
 <p><strong>Service</strong></p>
