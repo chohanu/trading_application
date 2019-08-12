@@ -1,7 +1,3 @@
----
-
-
----
 
 <h1 id="introduction">Introduction</h1>
 <p>This application is an http based online trading simulation REST API that allows a user to create an account and use it to deposit and withdraw money from it.Money from the account is also used to buy and sell stocks from the IEX stock exchange.</p>
