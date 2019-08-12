@@ -81,6 +81,7 @@ database.</p>
 <li><code>GET '/health'</code> Checks if SpringBoot app is running.</li>
 </ul>
 <h2 id="architecture">Architecture</h2>
+<img src="/assets/Twitter.PNG">
 <p><strong>Controller</strong></p>
 <p>This layer interacts with the user with the help of Swagger UI. It gets input from the user and then calls the corresponding service method</p>
 <p><strong>Service</strong></p>
