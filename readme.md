@@ -9,7 +9,7 @@
 <li>IEX Token</li>
 <li>Docker</li>
 <li>PostgreSQL Database<br>
-&lt;![endif]–&gt;</li>
+
 </ul>
 <p>Usage:</p>
 <ul>
@@ -39,7 +39,7 @@ bash start_up.sh PSQL_HOST PSQL_USER PSQL_PASSWORD</p>
 </ul>
 <h2 id="rest-api-usage">Rest API Usage</h2>
 <p>Swagger is an open-source software framework that helps developers design, build, document, and consume REST APIs. The API structure is prone to errors and swagger makes the job of developers a lot easier by testing the endpoints with the help of interactive GUI.<br>
-&lt;![endif]–&gt;</p>
+
 <p><strong>Quote Controller</strong></p>
 <p>Through this controller,Iex  data quotes are retrieved by sending http requests to the IEXcloud and stored into the database using JDBC components.</p>
 <ul>
@@ -69,7 +69,7 @@ database.</p>
 <li>POST '/trader/ - Creates a trader and associated account</li>
 <li>PUT '/trader/deposit/traderId/{traderId}/amount/{amount} – Deposits money/amount in the trader’s account balance</li>
 <li>PUT '/trader/withdraw/traderId/{traderId}/amount/{amount} – Withdraws money/ amount from trader’s account balance<br>
-&lt;![endif]–&gt;</li>
+
 </ul>
 <p><strong>Order Controller</strong></p>
 <p>This controller is used to buy or sell a stock for a trader.</p>
