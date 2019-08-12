@@ -1,6 +1,4 @@
 package ca.jrvs.apps.trading.controller;
-
-
 import ca.jrvs.apps.trading.Service.OrderService;
 import ca.jrvs.apps.trading.model.domain.Marketorderdto;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;

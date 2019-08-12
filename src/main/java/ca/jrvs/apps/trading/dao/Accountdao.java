@@ -1,6 +1,4 @@
 package ca.jrvs.apps.trading.dao;
-
-
 import ca.jrvs.apps.trading.model.domain.Account;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;

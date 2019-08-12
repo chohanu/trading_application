@@ -1,4 +1,3 @@
-
 package ca.jrvs.apps.trading;
 
 import com.google.common.base.Predicates;

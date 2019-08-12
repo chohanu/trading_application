@@ -1,5 +1,4 @@
 package ca.jrvs.apps.trading.controller;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +10,6 @@ public class Appcontroller {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public String health() {
-
         return "I am healthy";
     }
-
 }

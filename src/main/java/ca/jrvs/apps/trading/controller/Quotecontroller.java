@@ -1,6 +1,5 @@
 package ca.jrvs.apps.trading.controller;
 
-
 import ca.jrvs.apps.trading.Service.Quoteservice;
 import ca.jrvs.apps.trading.dao.Marketdatadao;
 import ca.jrvs.apps.trading.dao.Quotedao;

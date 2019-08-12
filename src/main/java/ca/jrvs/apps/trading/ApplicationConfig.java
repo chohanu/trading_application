@@ -1,4 +1,3 @@
-
 package ca.jrvs.apps.trading;
 
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
