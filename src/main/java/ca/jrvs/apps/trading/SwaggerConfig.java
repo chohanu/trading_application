@@ -18,6 +18,7 @@ import static springfox.documentation.builders.PathSelectors.any;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    
 
     @Bean
     public Docket docket() {
