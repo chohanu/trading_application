@@ -33,7 +33,8 @@ bash start_up.sh PSQL_HOST PSQL_USER PSQL_PASSWORD</p>
 <a href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a></p>
   <img src="/asset/swagger.PNG">
   
-  
+  <br> </br>
+  <br> </br>
   
   
   
@@ -114,5 +115,5 @@ database.</p>
 <p>It is a free and open source relational database system. It collects information from Dao’s and stores them into the datadabse using JDBC components.</p>
 <p><strong>IEX</strong><br>
 It provides access to Canadian and US Stocke market data.This application uses IEX cloud to collect most updated market data by sending http request</p>
-<h2 id="delete-a-file">Delete a file</h2>
+
 
