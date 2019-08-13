@@ -34,7 +34,7 @@ bash start_up.sh PSQL_HOST PSQL_USER PSQL_PASSWORD</p>
   <img src="/asset/swagger.PNG">
   
   <br> </br>
-  <br> </br>
+  
   
   
   
