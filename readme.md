@@ -95,7 +95,7 @@ database.</p>
 
 
 <h2 id="architecture">Architecture</h2>
-<img src="/assets/Twitter.PNG">
+<img src="/asset/archdgrm.PNG">
 
 
 
