@@ -31,7 +31,7 @@ bash start_up.sh PSQL_HOST PSQL_USER PSQL_PASSWORD</p>
 <li>
 <p>Use the API through Swagger UI<br>
 <a href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a></p>
-  <img src="/assets/Twitter.PNG">
+  <img src="/assets/swagger.PNG">
   
   
   
@@ -41,7 +41,7 @@ bash start_up.sh PSQL_HOST PSQL_USER PSQL_PASSWORD</p>
 <li>
 <p>We can also use the API though POSTMAN by executing the http  request and importing the API specification.<br>
 <a href="http://localhost:8080/v2/api-docs">http://localhost:8080/v2/api-docs</a></p>
-  <img src="/assets/Twitter.PNG">
+  <img src="/assets/postman.PNG">
   
   
   
