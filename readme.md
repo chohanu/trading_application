@@ -29,6 +29,7 @@ git clone <a href="https://github.com/chohanu/trading_application.git">https://g
 bash start_up.sh PSQL_HOST PSQL_USER PSQL_PASSWORD</p>
 </li>
 <li>
+  <br> </br>
 <p>Use the API through Swagger UI<br>
 <a href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a></p>
   <img src="/asset/swagger.PNG">
